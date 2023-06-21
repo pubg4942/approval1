@@ -16,3 +16,9 @@ jobs:
           echo "Comment Author: ${{ github.event.comment.user.login }}"
           echo "PR Number: ${{ github.event.issue.number }}"
           echo "Repository: ${{ github.repository }}"
+          if [[ "${{ github.event.comment.body }}" == "atlantis apply" ]]; then
+              echo "need second lvl of approval"
+              exit 1
+            else
+              echo  "good to apply"
+            fi
