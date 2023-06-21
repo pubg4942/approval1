@@ -16,6 +16,11 @@ jobs:
           echo "Comment Author: ${{ github.event.comment.user.login }}"
           echo "PR Number: ${{ github.event.issue.number }}"
           echo "Repository: ${{ github.repository }}"
+          if [ "$(curl -sSL -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+            'https://api.github.com/repos/pubg4942/approval1/pulls/1/reviews?state=APPROVED' | jq '. | length')" -lt 2 ]; then
+              echo "Cannot apply changes. Insufficient PR approvals."
+              exit 1
+          fi
           if [[ "${{ github.event.comment.body }}" == "atlantis apply" ]]; then
               echo "need second lvl of approval"
               exit 1
