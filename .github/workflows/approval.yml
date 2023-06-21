@@ -1,14 +1,14 @@
-name: PR apply Comment Trigger
+name: apply
 on:
   issue_comment:
 jobs:
-  process_comment:
-    name: approval check
+  process:
+    name: approval
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Process Comment
+      - name: Proces
         run: |
           echo "Comment Body: ${{ github.event.comment.body }}"
           echo "Comment Author: ${{ github.event.comment.user.login }}"
