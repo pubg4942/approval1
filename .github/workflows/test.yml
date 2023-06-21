@@ -1,6 +1,6 @@
 name: Trigger
 on:
-  pull_request:
+  issue_comment:
 jobs:
   comment:
     name: check
