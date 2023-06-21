@@ -1,14 +1,14 @@
-name: PR apply Comment Trigger
+name: Trigger
 on:
   pull_request:
 jobs:
-  process_comment:
+  comment:
     name: check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Process Comment
+      - name: Comment
         run: |
           echo "PR Number: ${{ github.event.issue.number }}"
           echo "Repository: ${{ github.repository }}"
