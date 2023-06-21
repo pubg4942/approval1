@@ -1,4 +1,4 @@
-name: qwerty
+name: t20
 on:
   issue_comment:
     types:
