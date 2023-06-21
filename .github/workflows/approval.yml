@@ -1,9 +1,6 @@
 name: PR apply Comment Trigger
 on:
   issue_comment:
-    types:
-      - created
-      - edited
 jobs:
   process_comment:
     name: approval check
