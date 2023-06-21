@@ -1,35 +1,24 @@
 name: qwerty
 on:
   issue_comment:
-    types: [created]
+    types:
+      - created
+      - edited
 jobs:
-  process:
-    if: >
-      github.event.issue.pull_request &&
-      startsWith(github.event.comment.body, 'atlantis apply')
-    name: approval
+  qwerty:
     runs-on: ubuntu-latest
     steps:
-    
-      - name: Github API Request
-        id: request
-        uses: octokit/request-action@v2.0.0
-        with:
-          route: ${{ github.event.issue.pull_request.url }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Checkout PR Branch
+      - name: Checkout Repository
         uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ fromJson(steps.request.outputs.data).head.repo.full_name }}
-          ref: ${{ steps.pr_data.outputs.branch }}
-          
-      - name: Get PR informations
-        id: pr_data
+      - name: Process Comment
         run: |
-          echo "::set-output name=repo_name::${{ fromJson(steps.request.outputs.data).head.repo.full_name }}"
-          echo "::set-output name=repo_clone_url::${{ fromJson(steps.request.outputs.data).head.repo.clone_url }}"
-          echo "::set-output name=repo_ssh_url::${{ fromJson(steps.request.outputs.data).head.repo.ssh_url }}"
-        
+          echo "Comment Body: ${{ github.event.comment.body }}"
+          echo "Comment Author: ${{ github.event.comment.user.login }}"
+          echo "PR Number: ${{ github.event.issue.number }}"
+          echo "Repository: ${{ github.repository }}"
+          if [[ "${{ github.event.comment.body }}" == "atlantis apply" ]]; then
+              echo "need second lvl of approval"
+              exit 1
+            else
+              echo  "good to apply"
+            fi
