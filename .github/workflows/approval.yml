@@ -1,6 +1,7 @@
 name: apply
 on:
-  issue_comment:
+  pull_request:
+    types: [opened, edited]
 jobs:
   process:
     name: approval
