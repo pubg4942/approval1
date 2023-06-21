@@ -3,7 +3,7 @@ on:
   pull_request:
 jobs:
   process_comment:
-    name: approval check
+    name: check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
