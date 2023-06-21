@@ -6,6 +6,7 @@ on:
       - edited
 jobs:
   process_comment:
+    name: approval check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
