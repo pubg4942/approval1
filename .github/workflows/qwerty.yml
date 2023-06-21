@@ -1,0 +1,12 @@
+name: PR commented
+
+on: issue_comment
+
+jobs:
+  pr:
+    if: ${{ github.event.issue.pull_request && contains(github.event.comment.body, 'atlantis apply') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print
+        run: |
+          echo "need secound level of approver"
