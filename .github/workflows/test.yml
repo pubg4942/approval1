@@ -1,0 +1,20 @@
+name: PR apply Comment Trigger
+on:
+  pull_request:
+jobs:
+  process_comment:
+    name: approval check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Process Comment
+        run: |
+          echo "PR Number: ${{ github.event.issue.number }}"
+          echo "Repository: ${{ github.repository }}"
+          if [[ ${{ github.event.issue.number }}" == "3" ]]; then
+              echo "need second lvl of approval"
+              exit 1
+            else
+              echo  "good to apply"
+            fi
