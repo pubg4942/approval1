@@ -7,7 +7,7 @@ if [ -d C:/Users/Regenerate/Desktop/hardwork/source ]; then
     else
         echo "destination folder does not exit"
         echo "creating destination folder"
-        mkdir destination
+        mkdir C:/Users/Regenerate/Desktop/hardwork/destination
         echo "copying from source to destination"
         cp C:/Users/Regenerate/Desktop/hardwork/source/* C:/Users/Regenerate/Desktop/hardwork/destination
     fi
