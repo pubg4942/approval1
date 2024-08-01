@@ -11,7 +11,7 @@ pipeline {
     stages {
 
         stage(linux_commands) {
-            with {
+            when {
                 expression {
                     "${execute}" == true
                 }
