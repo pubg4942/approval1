@@ -3,6 +3,14 @@ pipeline {
 
     stages {
 
+        stage(linux_commands) {
+            sh '''
+            pwd
+            ls -la
+            whoami
+            '''
+        }
+
         stage(initialization) {
             steps {
                 sh '''
@@ -27,12 +35,14 @@ pipeline {
             }
         }
 
-        stage(apply) {
-            when { JENKINS_URL == "http://localhost:8080/" }
-            steps {
-                sh '''
-                terraform apply --auto-approve 
-                '''
+        stage(terraform_apply) {
+            when {
+                expression {
+                    JENKINS_URL = "http://localhost:8080/"
+                }
+            }
+            steps{
+                terraform apply --auto-approve
             }
         }
 
