@@ -40,7 +40,8 @@ pipeline {
         stage(terraform_apply) {
             when {
                 expression {
-                    JENKINS_URL = "http://localhost:8081/"
+                    JENKINS_URL == "http://localhost:8081/"
+
                 }
             }
             steps{
