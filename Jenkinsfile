@@ -40,7 +40,7 @@ pipeline {
         stage(terraform_apply) {
             when {
                 expression {
-                    JENKINS_URL = "http://localhost:8080/"
+                    JENKINS_URL = "http://localhost:8081/"
                 }
             }
             steps{
@@ -57,7 +57,6 @@ pipeline {
                 echo BUILD_URL
                 echo JENKINS_URL
                 echo GIT_BRANCH
-                echo GIT_LOCAL_BRANCH
             }
         }
     }
