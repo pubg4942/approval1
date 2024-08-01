@@ -12,7 +12,7 @@ variable "map" {
 
 variable "string" {
     type = string
-    default = {}
+    default = ""
 }
 
 variable "boolean" {
