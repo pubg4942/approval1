@@ -16,22 +16,9 @@ pipeline {
         stage(initialization) {
             steps {
                 sh '''
-                terraform 
-                '''
-            }
-        }
-
-        stage(validation) {
-            steps {
-                sh '''
+                terraform init
+                terraform fmt
                 terraform validate
-                '''
-            }
-        }
-
-        stage(plan) {
-            steps {
-                sh '''
                 terraform plan
                 '''
             }
