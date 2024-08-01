@@ -28,6 +28,9 @@ pipeline {
         }
 
         stage(apply) {
+            when {
+                JENKINS_URL == "http://localhost:8080/"
+            }
             steps {
                 sh '''
                 terraform apply --auto-approve 
