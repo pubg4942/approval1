@@ -41,7 +41,8 @@ pipeline {
 
         stage(terraform_apply) {
             steps{
-                withCredentials([usernamePassword(credentialsId: "username_password", usernameVariable: "user", passphraseVariable: "pass")]) {
+                withCredentials([usernamePassword(credentialsId: 'username_password', usernameVariable: 'user', passphraseVariable: 'pass')]) 
+                {
                     sh '''
                     echo "${user}"
                     echo "${pass}"
