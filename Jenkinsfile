@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 
@@ -11,11 +10,6 @@ pipeline {
     stages {
 
         stage(linux_commands) {
-            when {
-                expression {
-                    "${execute}" == true
-                }
-            }
             steps{
                 sh '''
                 echo " ${string} ${region} ${execute_in_prod} "                
