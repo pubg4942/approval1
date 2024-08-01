@@ -30,8 +30,18 @@ pipeline {
         stage(apply) {
             steps {
                 sh '''
-                terraform apply
+                terraform apply --auto-approve 
                 '''
+            }
+        }
+
+        stage(testing jenkins env variables) {
+            steps {
+                echo BRANCH_NAME
+                echo BUILD_NUMBER
+                echo BUILD_ID
+                echo BUILD_URL
+                echo JENKINS_URL
             }
         }
     }
