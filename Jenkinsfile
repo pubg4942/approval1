@@ -37,7 +37,6 @@ pipeline {
 
         stage(testing_jenkins_env_variables) {
             steps {
-                echo BRANCH_NAME
                 echo BUILD_NUMBER
                 echo BUILD_ID
                 echo BUILD_URL
