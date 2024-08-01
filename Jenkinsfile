@@ -1,21 +1,30 @@
 pipeline {
     agent any
-    
+
     stages {
-        stage ('terraform worflow') {
+
+        stage(initialization) {
             steps {
-                sh '''
                 terraform init
-                terraform validate
-                terraform plan
-                '''
             }
         }
-    }
-    
-    post {
-        cleanup {
-            cleanWs()
+
+        stage(validation) {
+            steps {
+                terraform validate
+            }
+        }
+
+        stage(plan) {
+            steps {
+                terraform plan
+            }
+        }
+
+        stage(apply) {
+            steps {
+                terraform apply
+            }
         }
     }
 }
