@@ -25,7 +25,7 @@ pipeline {
                 terraform init
                 terraform fmt
                 terraform validate
-                terraform plan 
+                terraform plan --var string="${string}"
                 '''
             }
         }
