@@ -1,14 +1,21 @@
-properties([
-    parameters([
-        string(defaultValue: "helloworld", description: "input string", name: "string",),
-    ])
-])
+
 pipeline {
     agent any
+
+    parameters {
+        string(name: "string", defaultValue: "helloworld", description: "enter string input")
+        choice(name: "region", choices: ["us-west-2", "us-east-1", "ap-sout-1", "eu-entral-1"], description: "select region")
+        booleanparam(name: "execute", defaultValue: true, description: "whether to execute a step")
+    }
 
     stages {
 
         stage(linux_commands) {
+            with {
+                expression {
+                    "${execute}" == true
+                }
+            }
             steps{
                 sh '''
                 pwd
@@ -39,7 +46,7 @@ pipeline {
             }
             steps{
                 sh '''
-                terraform apply --auto-approve
+                terraform apply --var string="${region}" --auto-approve
                 '''
             }
         }
