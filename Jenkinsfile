@@ -41,11 +41,11 @@ pipeline {
 
         stage(terraform_apply) {
             steps{
-                withCredentials([usernamePassword(credentialsId: 'username_password', usernameVariable: 'user', passphraseVariable: 'pass')]) 
+                withCredentials([usernamePassword(credentialsId: 'username_password', usernameVariable: 'username', passwordVariable: 'password')]) 
                 {
                     sh '''
-                    echo "${user}"
-                    echo "${pass}"
+                    echo "${username}"
+                    echo "${password}"
                     terraform apply --var string="${env2} ${env3}" --auto-approve
                     '''
                 }
