@@ -12,7 +12,7 @@ pipeline {
         stage(linux_commands) {
             when {
                 expression {
-                    "${param.execute}" == true
+                    "${execute}" == true
                 }
             }
             steps{
