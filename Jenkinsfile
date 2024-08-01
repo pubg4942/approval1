@@ -1,10 +1,11 @@
+
 pipeline {
     agent any
 
     parameters {
         string(name: "string", defaultValue: "helloworld", description: "enter string input")
         choice(name: "region", choices: ["us-west-2", "us-east-1", "ap-sout-1", "eu-entral-1"], description: "select region")
-        booleanParam(name: "execute", defaultValue: true, description: "whether to execute a step")
+        booleanParam(name: "execute_in_prod", defaultValue: true, description: "whether to execute a step in prod")
     }
 
     stages {
@@ -17,6 +18,7 @@ pipeline {
             }
             steps{
                 sh '''
+                echo " ${string} ${region} ${execute_in_prod} "                
                 pwd
                 ls -la
                 whoami
@@ -39,8 +41,7 @@ pipeline {
         stage(terraform_apply) {
             when {
                 expression {
-                    GIT_BRANCH == "origin/main"
-
+                    "${execute_in_prod}" == true
                 }
             }
             steps{
