@@ -11,7 +11,7 @@ variable "map" {
 }
 
 variable "string" {
-    default = "hello_world"
+    default = {}
 }
 
 variable "boolean" {
