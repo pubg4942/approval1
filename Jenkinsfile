@@ -66,11 +66,17 @@ pipeline {
         always {
             cleanWs()
         }
-        sucess {
+        success {
             echo "pipeline is completed sucuessfully"
         }
-        failure{
+        failure {
             echo "pipeline is failed"
         }
+        aborted {
+            echo "pipeline is aborted"
+        }
+        unsuccessful (
+            echo "pipeline is unsuccessful"
+        )
     }
 }
