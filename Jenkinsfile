@@ -40,7 +40,7 @@ pipeline {
         stage(terraform_apply) {
             when {
                 expression {
-                    JENKINS_URL == "http://localhost:8081/"
+                    GIT_BRANCH == "origin/main"
 
                 }
             }
@@ -65,6 +65,12 @@ pipeline {
     post {
         always {
             cleanWs()
+        }
+        sucess {
+            echo "pipeline is completed sucuessfully"
+        }
+        failure{
+            echo "pipeline is failed"
         }
     }
 }
