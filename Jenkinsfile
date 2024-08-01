@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 
@@ -13,7 +12,7 @@ pipeline {
         stage(linux_commands) {
             when {
                 expression {
-                    "${execute}" == true
+                    "${param.execute}" == true
                 }
             }
             steps{
