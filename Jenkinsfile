@@ -1,3 +1,8 @@
+properties([
+    parameters([
+        string(defaultValue: "helloworld", description: "input string", name: "string",),
+    ])
+])
 pipeline {
     agent any
 
