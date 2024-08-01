@@ -42,7 +42,7 @@ pipeline {
         stage(terraform_apply) {
             when {
                 expression {
-                    "${execute_in_prod}" == true
+                    "${execute_in_prod}" == false
                 }
             }
             steps{
