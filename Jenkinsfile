@@ -40,13 +40,11 @@ pipeline {
         }
 
         stage(terraform_apply) {
-            when {
-                expression {
-                    "${execute_in_prod}" == false
-                }
-            }
             steps{
+                withCredentials([usernamePassword(credentialsId: "username_password", usernameVariable: "username", passphraseVariable: "password")])
                 sh '''
+                echo "${username}"
+                echo "${password}"
                 terraform apply --var string="${env2} ${env3}" --auto-approve
                 '''
             }
