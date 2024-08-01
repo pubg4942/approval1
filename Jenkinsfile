@@ -4,11 +4,13 @@ pipeline {
     stages {
 
         stage(linux_commands) {
-            sh '''
-            pwd
-            ls -la
-            whoami
-            '''
+            steps{
+                sh '''
+                pwd
+                ls -la
+                whoami
+                '''
+            }
         }
 
         stage(initialization) {
@@ -42,7 +44,9 @@ pipeline {
                 }
             }
             steps{
+                sh '''
                 terraform apply --auto-approve
+                '''
             }
         }
 
@@ -52,6 +56,8 @@ pipeline {
                 echo BUILD_ID
                 echo BUILD_URL
                 echo JENKINS_URL
+                echo GIT_BRANCH
+                echo GIT_LOCAL_BRANCH
             }
         }
     }
