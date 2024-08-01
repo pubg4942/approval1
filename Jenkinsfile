@@ -66,7 +66,7 @@ pipeline {
         always {
             cleanWs()
         }
-        successful {
+        success {
             sh '''
             echo "pipeline is completed successfully"
             '''
