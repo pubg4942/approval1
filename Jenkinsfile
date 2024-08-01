@@ -14,6 +14,7 @@ pipeline {
                 pwd
                 ls -la
                 whoami
+                echo "${string}"
                 '''
             }
         }
@@ -24,7 +25,7 @@ pipeline {
                 terraform init
                 terraform fmt
                 terraform validate
-                terraform plan
+                terraform plan 
                 '''
             }
         }
