@@ -1,3 +1,14 @@
+def linuxcommands () {
+    sh'''
+    pwd
+    ls -l
+    whoami
+    uname -a
+    top
+    '''
+}
+
+
 pipeline {
     agent any
 
@@ -17,15 +28,7 @@ pipeline {
     stages {
 
         stage(linux_commands) {
-            steps{
-                sh '''
-                echo " ${string} ${region} ${execute_in_prod} "                
-                pwd
-                ls -la
-                whoami
-                echo "${string}"
-                '''
-            }
+            linux_commands()
         }
 
         stage(initialization) {
