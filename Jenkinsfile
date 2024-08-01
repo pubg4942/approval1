@@ -1,6 +1,13 @@
 pipeline {
     agent any
 
+    environment {
+        env1 = "dai"
+        env2 = "kena"
+        env3 = "punda"
+        env4 = "ootha"
+    }
+
     parameters {
         string(name: "string", defaultValue: "helloworld", description: "enter string input")
         choice(name: "region", choices: ["us-west-2", "us-east-1", "ap-sout-1", "eu-entral-1"], description: "select region")
@@ -27,7 +34,7 @@ pipeline {
                 terraform init
                 terraform fmt
                 terraform validate
-                terraform plan --var string="${string}"
+                terraform plan --var string="${env4} ${env3}"
                 '''
             }
         }
@@ -40,7 +47,7 @@ pipeline {
             }
             steps{
                 sh '''
-                terraform apply --var string="${region}" --auto-approve
+                terraform apply --var string="${env2} ${env3}" --auto-approve
                 '''
             }
         }
