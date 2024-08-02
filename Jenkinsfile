@@ -29,9 +29,7 @@ pipeline {
 
         stage(linux_commands) {
             steps {
-                script {
-                    linux_commands()   
-                }
+                linuxcommands()
             }
         }
 
