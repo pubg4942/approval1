@@ -7,7 +7,10 @@ pipeline {
 
             steps {
                  sh '''
-                 echo "bitch"
+                 set +e
+                 which packer
+                 which terraform
+                 
                  '''
             }
         }
