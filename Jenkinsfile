@@ -1,5 +1,6 @@
 def linuxcommands () {
     sh'''
+    set +x
     which terraform
     which git
     which packer
