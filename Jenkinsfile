@@ -48,9 +48,9 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'source_path', defaultvalue: 'C:/Users/Regenerate/Desktop/hardwork/source', description: 'path of source folder')
-        string(name: 'dest_path', defaultvalue: 'C:/Users/Regenerate/Desktop/hardwork/destination', description: 'path of destination folder')
-        string(name: 'source_files', defaultvalue: 'trail.tf', description: 'files of source folder')
+        string(name: 'src', defaultValue: 'C:/Users/Regenerate/Desktop/hardwork/source', description: 'path of source folder')
+        string(name: 'des', defaultValue: 'C:/Users/Regenerate/Desktop/hardwork/destination', description: 'path of destination folder')
+        string(name: 'srcfil', defaultValue: 'trail.tf', description: 'files of source folder')
     }
 
     stages {
@@ -60,7 +60,7 @@ pipeline {
             steps {
                 script {
                     linux()
-                    copy ('C:/Users/Regenerate/Desktop/hardwork/source', 'C:/Users/Regenerate/Desktop/hardwork/destination', 'test.txt')
+                    copy ("${src}", "${des}", "${srcfil}")
                 }
             }
         }
