@@ -43,13 +43,13 @@ def copy (String source_path, String dest_path, String source_files) {
     """
 }
 
-def approvalchecker (String num_of_approvals, String pr_approvers, String 2ndlvl_approvers) {
+def approvalchecker (String num_of_approvals, String pr_approvers, String lvl_approvers) {
     sh """
     if [ $num_of_approvals -gt 2 ]; then
         echo "has min number of approvals"
         echo "checking for 2nd lvl approver"
         for approvers in $pr_approvers; do
-            for 2ndapprovers in $2ndlvl_approvers; do
+            for 2ndapprovers in $lvl_approvers; do
                 if [ $approvers == $2ndapprovers ]; then
                     echo "got 2nd lvl approval from $2ndapprovers"
                     echo "proceedind with apply"
@@ -74,7 +74,7 @@ pipeline {
         string(name: 'des', defaultValue: 'C:/Users/Regenerate/Desktop/hardwork/destination', description: 'path of destination folder')
         string(name: 'srcfil', defaultValue: 'trail.tf', description: 'files of source folder')
         string(name: 'count', defaultValue: '3', description: 'no of pr approvals' )
-        choice(name: '2nd', choices: ['alex', 'maria', 'k', 'f'], description: 'list of approvers')
+        choice(name: 'nd', choices: ['alex', 'maria', 'k', 'f'], description: 'list of approvers')
         choice(name: 'pr', choices: ['alex', 'maria', 'k', 'f'], description: 'list of pr approvers')
     }
 
@@ -84,7 +84,7 @@ pipeline {
 
             steps {
                 script {
-                    approvalchecker("${count}", "${pr}", "${2nd}")
+                    approvalchecker("${count}", "${pr}", "${nd}")
                 }
             }
         }
