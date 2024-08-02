@@ -14,9 +14,9 @@ def copy (String source_path, String dest_path, String source_files) {
     """
 
     sh '''
-    final_source= 'cat source'
-    final_dest= 'cat dest'
-    final_file= 'cat file'
+    final_source='cat source'
+    final_dest='cat dest'
+    final_file='cat file'
 
     if [ -d $final_source ]; then
         echo "source is present"
@@ -61,10 +61,10 @@ pipeline {
         stage("first stage") {
 
             steps {
-                sh '''
-                ls -l
-                cat project.sh
-                '''
+                script {
+                    linux()
+                    copy ('C:/Users/Regenerate/Desktop/hardwork/source', 'C:/Users/Regenerate/Desktop/hardwork/destination', 'test.txt')
+                }
             }
         }
     }
