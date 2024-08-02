@@ -54,6 +54,7 @@ def approvalchecker (String num_of_approvals, String pr_approvers, String lvl_ap
         else
             echo "need second level approval"
             echo "cant proceed to apply"
+        fi
     else
         echo "does ot have min no of approvals"
         echo "cant apply"
