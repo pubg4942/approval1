@@ -48,17 +48,12 @@ def approvalchecker (String num_of_approvals, String pr_approvers, String lvl_ap
     if [ $num_of_approvals -gt 2 ]; then
         echo "has min number of approvals"
         echo "checking for 2nd lvl approver"
-        for approvers in $pr_approvers; do
-            for ndapprovers in $lvl_approvers; do
-                if [ $approvers == $ndapprovers ]; then
-                    echo "got 2nd lvl approval from $ndapprovers"
-                    echo "proceedind with apply"
-                else
-                    echo "need 2nd lvl approval"
-                    echo "cant apply"
-                fi
-            done
-        done
+        if [ $pr_approvers == $lvl_approvers ]; then
+            echo "got 2nd lvl approval from $lvl_approvers"
+            echo "proceeding with apply"
+        else
+            echo "need second level approval"
+            echo "cant proceed to apply"
     else
         echo "does ot have min no of approvals"
         echo "cant apply"
