@@ -61,8 +61,10 @@ pipeline {
         stage("first stage") {
 
             steps {
+                sh '''
                 ls -l
                 cat project.sh
+                '''
             }
         }
     }
