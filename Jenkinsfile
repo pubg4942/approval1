@@ -7,36 +7,46 @@ def linux () {
 }
 
 def copy (String source_path, String dest_path, String source_files) {
+    sh """
+    echo "$source_path" > source
+    echo "$dest_path" > dest
+    echo "$source_files" > file
+    """
+
     sh '''
-    if [ -d source_path ]; then
+    final_source= 'cat source'
+    final_dest= 'cat dest'
+    final_file= 'cat file'
+
+    if [ -d $final_source ]; then
         echo "source is present"
-        if [ -d dest_path ]; then
+        if [ -d $final_dest ]; then
             echo "destination is present"
             echo "copy from source to destination"
-            cp source_path/* dest_path
+            cp $final_source/* $final_dest
         else
             echo "destination is not present"
             echo "creating destination folder"
-            mkdir dest_path
+            mkdir $final_dest
             echo "copying from source to destination"
-            cp source_path/* dest_path
+            cp $final_source/* $final_dest
         fi
     else
         echo "source is not present"
         echo "creating source folder"
-        mkdir source_path
+        mkdir $final_source
         echo "creating files inside source folder"
-        touch source_path/source_files
-        if [ -d dest_path ]; then
+        touch $final_source/$final_file
+        if [ -d $final_dest ]; then
             echo "destination is present"
             echo "copy from source to destination"
-            cp source_path/* dest_path
+            cp $final_source/* $final_dest
         else
             echo "destination is not present"
             echo "creating destination folder"
-            mkdir dest_path
+            mkdir $final_dest
             echo "copying from source to destination"
-            cp source_path/* dest_path
+            cp $final_source/* $final_dest
         fi
     fi
     '''
@@ -51,10 +61,25 @@ pipeline {
         stage("first stage") {
 
             steps {
-                sh '''
-                ls -l
-                '''
+                script {
+                    linux()
+                    copy ('C:/Users/Regenerate/Desktop/hardwork/source', 'C:/Users/Regenerate/Desktop/hardwork/destination', 'test.txt')
+                }
             }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+
+        success {
+            echo "pipeline success"
+        }
+
+        failure {
+            echo "pipeline failure"
         }
     }
 }
