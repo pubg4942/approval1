@@ -13,43 +13,43 @@ def copy (String source_path, String dest_path, String source_files) {
     echo "$source_files" > file
     """
 
-    sh '''
+    sh """
     final_source='cat source'
     final_dest='cat dest'
     final_file='cat file'
 
-    if [ -d $final_source ]; then
+    if [ -d $source_path ]; then
         echo "source is present"
-        if [ -d $final_dest ]; then
+        if [ -d $dest_path ]; then
             echo "destination is present"
             echo "copy from source to destination"
-            cp $final_source/* $final_dest
+            cp $source_path/* $dest_path
         else
             echo "destination is not present"
             echo "creating destination folder"
-            mkdir $final_dest
+            mkdir $dest_path
             echo "copying from source to destination"
-            cp $final_source/* $final_dest
+            cp $source_path/* $dest_path
         fi
     else
         echo "source is not present"
         echo "creating source folder"
-        mkdir $final_source
+        mkdir $source_path
         echo "creating files inside source folder"
-        touch $final_source/$final_file
-        if [ -d $final_dest ]; then
+        touch $source_path/$source_files
+        if [ -d $dest_path ]; then
             echo "destination is present"
             echo "copy from source to destination"
-            cp $final_source/* $final_dest
+            cp $source_path/* $dest_path
         else
             echo "destination is not present"
             echo "creating destination folder"
-            mkdir $final_dest
+            mkdir $dest_path
             echo "copying from source to destination"
-            cp $final_source/* $final_dest
+            cp $source_path/* $dest_path
         fi
     fi
-    '''
+    """
 }
 
 
