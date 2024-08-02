@@ -7,17 +7,8 @@ def linux () {
 }
 
 def copy (String source_path, String dest_path, String source_files) {
+    
     sh """
-    echo "$source_path" > source
-    echo "$dest_path" > dest
-    echo "$source_files" > file
-    """
-
-    sh """
-    final_source='cat source'
-    final_dest='cat dest'
-    final_file='cat file'
-
     if [ -d $source_path ]; then
         echo "source is present"
         if [ -d $dest_path ]; then
@@ -55,6 +46,12 @@ def copy (String source_path, String dest_path, String source_files) {
 
 pipeline {
     agent any
+
+    parameters {
+        string(name: 'source_path', defaultvalue: 'C:/Users/Regenerate/Desktop/hardwork/source', description: 'path of source folder')
+        string(name: 'dest_path', defaultvalue: 'C:/Users/Regenerate/Desktop/hardwork/destination', description: 'path of destination folder')
+        string(name: 'source_files', defaultvalue: 'trail.tf', description: 'files of source folder')
+    }
 
     stages {
 
