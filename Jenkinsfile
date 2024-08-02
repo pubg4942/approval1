@@ -28,7 +28,9 @@ pipeline {
     stages {
 
         stage(linux_commands) {
-            linux_commands()
+            steps {
+                linux_commands()
+            }
         }
 
         stage(initialization) {
