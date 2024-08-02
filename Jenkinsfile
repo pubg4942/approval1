@@ -46,7 +46,7 @@ def copy (String source_path, String dest_path, String source_files) {
 def approvalchecker (String num_of_approvals, String pr_approvers, String lvl_approvers) {
     sh """
     if [ $num_of_approvals -le 2 ]; then
-        echo "need minimum 2 pr approvals, but got only $num_ofapprovals"
+        echo "need minimum 2 pr approvals, but got only $num_of_approvals"
         echo "couldnt proceed to apply"
     else
         if [ $pr_approvers == $lvl_approvers ]; then
