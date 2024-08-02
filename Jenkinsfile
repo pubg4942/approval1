@@ -1,5 +1,6 @@
 def linuxcommands () {
     sh'''
+    python
     pwd
     ls -l
     whoami
@@ -9,10 +10,6 @@ def linuxcommands () {
 
 pipeline {
     agent any
-
-    options {
-      ansiColor('xterm')
-    }
 
     environment {
         env1 = "dai"
