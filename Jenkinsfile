@@ -52,7 +52,10 @@ def approvalchecker (String num_of_approvals, String pr_approvers, String lvl_ap
         if [ $pr_approvers == $lvl_approvers ]; then
             echo "validated 2nd level approver as - $lvl_approvers"
             echo "proceeding to apply"
+        
         fi
+        echo "need 2nd level approval from $lvl_approvers"
+        echo "couldnt proceed to apply"
     fi
     """
 }
