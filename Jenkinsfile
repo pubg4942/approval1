@@ -51,10 +51,9 @@ pipeline {
         stage("first stage") {
 
             steps {
-                script {
-                    linux()
-                    copy ('C:/Users/Regenerate/Desktop/hardwork/source', 'C:/Users/Regenerate/Desktop/hardwork/destination', 'test.txt')
-                }
+                sh '''
+                ls -l
+                '''
             }
         }
     }
