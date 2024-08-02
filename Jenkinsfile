@@ -1,11 +1,9 @@
 def linuxcommands () {
     sh'''
-    set -e
     pwd
     ls -l
     whoami
     uname -a
-    top
     '''
 }
 
