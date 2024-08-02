@@ -1,5 +1,6 @@
 def linuxcommands () {
     sh'''
+    set +e
     pwd
     ls -l
     whoami
