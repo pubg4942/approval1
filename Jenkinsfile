@@ -1,3 +1,12 @@
+def linux () {
+    sh '''
+    set +e
+    which packer
+    which terraform
+    '''
+}
+
+
 pipeline {
     agent any
 
@@ -6,30 +15,9 @@ pipeline {
         stage("first stage") {
 
             steps {
-                 sh '''
-                 set +e
-                 which packer
-                 which terraform
-                 
-                 '''
-            }
-        }
-
-        stage("second stage") {
-
-            steps {
-                 sh '''
-                 echo "fuck"
-                 '''
-            }
-        }
-
-        stage("third stage") {
-
-            steps {
-                 sh '''
-                 echo "you"
-                 '''
+                script {
+                    linux()
+                }
             }
         }
     }
