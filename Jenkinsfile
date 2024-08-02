@@ -45,19 +45,14 @@ def copy (String source_path, String dest_path, String source_files) {
 
 def approvalchecker (String num_of_approvals, String pr_approvers, String lvl_approvers) {
     sh """
-    if [ $num_of_approvals -gt 2 ]; then
-        echo "has min number of approvals"
-        echo "checking for 2nd lvl approver"
-        if [ $pr_approvers == $lvl_approvers ]; then
-            echo "got 2nd lvl approval from $lvl_approvers"
-            echo "proceeding with apply"
-        else
-            echo "need second level approval"
-            echo "cant proceed to apply"
-        fi
+    if [ $num_of_approvals -le 2 ]; then
+        echo "need minimum 2 pr approvals, but got only $num_ofapprovals"
+        echo "couldnt proceed to apply"
     else
-        echo "does ot have min no of approvals"
-        echo "cant apply"
+        if [ $pr_approvers == $lvl_approvers ]; then
+            echo "validated 2nd level approver as - $lvl_approvers"
+            echo "proceeding to apply"
+        fi
     fi
     """
 }
