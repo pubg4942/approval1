@@ -1,6 +1,10 @@
 def linuxcommands () {
     sh'''
-    python
+    which terraform
+    which git
+    which packer
+    which python
+    which ansible
     pwd
     ls -l
     whoami
