@@ -43,6 +43,28 @@ def copy (String source_path, String dest_path, String source_files) {
     """
 }
 
+def approvalchecker (num_of_approvals, pr_approvers, 2ndlvl_approvers) {
+    sh """
+    if [ $num_of_approvals -gt 2 ]; then
+        echo "has min number of approvals"
+        echo "checking for 2nd lvl approver"
+        for approvers in $pr_approvers; do
+            for 2ndapprovers in $2ndlvl_approvers; do
+                if [ $approvers == $2ndapprovers ]; then
+                    echo "got 2nd lvl approval from $2ndapprovers"
+                    echo "proceedind with apply"
+                else
+                    echo "need 2nd lvl approval"
+                    echo "cant apply"
+                fi
+            done
+        done
+    else
+        echo "does ot have min no of approvals"
+        echo "cant apply"
+    fi
+    """
+}
 
 pipeline {
     agent any
@@ -51,6 +73,9 @@ pipeline {
         string(name: 'src', defaultValue: 'C:/Users/Regenerate/Desktop/hardwork/source', description: 'path of source folder')
         string(name: 'des', defaultValue: 'C:/Users/Regenerate/Desktop/hardwork/destination', description: 'path of destination folder')
         string(name: 'srcfil', defaultValue: 'trail.tf', description: 'files of source folder')
+        number(name: 'count', defaultValue: '3', description: 'no of pr approvals' )
+        choice(name: '2nd', choices: ['alex', 'maria', 'k', 'f'], description: 'list of approvers')
+        choice(name: 'pr', choices: ['alex', 'maria', 'k', 'f'], description: 'list of pr approvers')
     }
 
     stages {
@@ -59,8 +84,7 @@ pipeline {
 
             steps {
                 script {
-                    linux()
-                    copy ("${src}", "${des}", "${srcfil}")
+                    approvalchecker("${count}", "${pr}", "${2nd}")
                 }
             }
         }
