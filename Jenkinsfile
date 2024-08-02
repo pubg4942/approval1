@@ -6,38 +6,37 @@ def linux () {
     '''
 }
 
-def copy () {
+def copy (String source_path, String dest_path, String source_files) {
     sh '''
-    if [ -d C:/Users/Regenerate/Desktop/hardwork/source ]; then
+    if [ -d source_path ]; then
         echo "source is present"
-        if [ -d C:/Users/Regenerate/Desktop/hardwork/destination ]; then
+        if [ -d dest_path ]; then
             echo "destination is present"
             echo "copy from source to destination"
-            cp C:/Users/Regenerate/Desktop/hardwork/source/* C:/Users/Regenerate/Desktop/hardwork/destination
+            cp source_path/* dest_path
         else
             echo "destination is not present"
             echo "creating destination folder"
-            mkdir C:/Users/Regenerate/Desktop/hardwork/destination
+            mkdir dest_path
             echo "copying from source to destination"
-            cp C:/Users/Regenerate/Desktop/hardwork/source/* C:/Users/Regenerate/Desktop/hardwork/destination
+            cp source_path/* dest_path
         fi
     else
         echo "source is not present"
         echo "creating source folder"
-        mkdir C:/Users/Regenerate/Desktop/hardwork/source
+        mkdir source_path
         echo "creating files inside source folder"
-        touch C:/Users/Regenerate/Desktop/hardwork/source/test.txt
-        touch test.txt test.tf test.sh
-        if [ -d C:/Users/Regenerate/Desktop/hardwork/destination ]; then
+        touch source_path/source_files
+        if [ -d dest_path ]; then
             echo "destination is present"
             echo "copy from source to destination"
-            cp C:/Users/Regenerate/Desktop/hardwork/source/* C:/Users/Regenerate/Desktop/hardwork/destination
+            cp source_path/* dest_path
         else
             echo "destination is not present"
             echo "creating destination folder"
-            mkdir C:/Users/Regenerate/Desktop/hardwork/destination
+            mkdir dest_path
             echo "copying from source to destination"
-            cp C:/Users/Regenerate/Desktop/hardwork/source/* C:/Users/Regenerate/Desktop/hardwork/destination
+            cp source_path/* dest_path
         fi
     fi
     '''
@@ -54,7 +53,7 @@ pipeline {
             steps {
                 script {
                     linux()
-                    copy ()
+                    copy (C:/Users/Regenerate/Desktop/hardwork/source, C:/Users/Regenerate/Desktop/hardwork/destination, test.txt)
                 }
             }
         }
