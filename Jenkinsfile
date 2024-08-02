@@ -43,7 +43,7 @@ def copy (String source_path, String dest_path, String source_files) {
     """
 }
 
-def approvalchecker (num_of_approvals, pr_approvers, 2ndlvl_approvers) {
+def approvalchecker (String num_of_approvals, String pr_approvers, String 2ndlvl_approvers) {
     sh """
     if [ $num_of_approvals -gt 2 ]; then
         echo "has min number of approvals"
@@ -73,7 +73,7 @@ pipeline {
         string(name: 'src', defaultValue: 'C:/Users/Regenerate/Desktop/hardwork/source', description: 'path of source folder')
         string(name: 'des', defaultValue: 'C:/Users/Regenerate/Desktop/hardwork/destination', description: 'path of destination folder')
         string(name: 'srcfil', defaultValue: 'trail.tf', description: 'files of source folder')
-        number(name: 'count', defaultValue: '3', description: 'no of pr approvals' )
+        string(name: 'count', defaultValue: '3', description: 'no of pr approvals' )
         choice(name: '2nd', choices: ['alex', 'maria', 'k', 'f'], description: 'list of approvers')
         choice(name: 'pr', choices: ['alex', 'maria', 'k', 'f'], description: 'list of pr approvers')
     }
