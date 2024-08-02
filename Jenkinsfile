@@ -53,7 +53,7 @@ pipeline {
             steps {
                 script {
                     linux()
-                    copy (C:/Users/Regenerate/Desktop/hardwork/source, C:/Users/Regenerate/Desktop/hardwork/destination, test.txt)
+                    copy ('C:/Users/Regenerate/Desktop/hardwork/source', 'C:/Users/Regenerate/Desktop/hardwork/destination', 'test.txt')
                 }
             }
         }
