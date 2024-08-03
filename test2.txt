@@ -1,7 +1,3 @@
-<<<<<<< HEAD
 bloody hell
-=======
-important resource production
 loosu punda
 kenna punda
->>>>>>> 0925275 (hello)
